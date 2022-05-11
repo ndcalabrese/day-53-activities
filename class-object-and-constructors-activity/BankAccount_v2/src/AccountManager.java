@@ -17,7 +17,9 @@ public class AccountManager {
         // Add bank accounts to list of accounts.
         Collections.addAll(accountList, account1, account2, account3, account4);
 
-        // Display "main menu" to see if customer has an account
+        // Ask if customer has an account
+        // If customer has an existing account, go straight to management menu
+        // If not, create an account first
         if (welcomeUser()) {
             manageAccount(accountList, selectAccount(accountList, false));
         } else {
@@ -27,6 +29,9 @@ public class AccountManager {
 
     }
 
+    // Display a welcome message to the user, and get input to determine
+    // if user has an existing bank account.
+    // Returns a boolean value that indicates if they have an account or not
     public static boolean welcomeUser() {
         System.out.println("""
                         
@@ -44,6 +49,8 @@ public class AccountManager {
 
         boolean userHasAcc = false;
 
+        // If user enters an invalid option (i.e., not 1 or 2),
+        // display message.
         while (true) {
             System.out.print("\nResponse: ");
             String userInput = getUserInput();
@@ -60,9 +67,13 @@ public class AccountManager {
         return userHasAcc;
     }
 
+    // Create new account.
+    // Prompt user to enter name of account holder and initial deposit amount.
+    //
     public static BankAccount createAccount(ArrayList<BankAccount> accountList) {
         System.out.println("\nLet's create a new bank account!\n");
         System.out.print("What's the name of the account holder?: ");
+        // Instantiate new BankAccount object with no properties
         BankAccount newAccount = new BankAccount();
         double accInitialBalance;
 
@@ -72,6 +83,8 @@ public class AccountManager {
             System.out.print("\nWhat is the initial deposit amount?: ");
             String userInputBalance = getUserInput();
 
+            // Check if user input is a number, and if it is, check if the
+            // number is greater than zero
             if (isNumeric(userInputBalance)) {
                 accInitialBalance = Double.parseDouble(userInputBalance);
                 if (accInitialBalance > 0) {
@@ -85,12 +98,13 @@ public class AccountManager {
             }
         }
 
+        // Set an account number for the new account.
         newAccount.setAccNumber((accountList.size() + 1));
 
         return newAccount;
     }
 
-    // Provide user with the list of accounts and allow them to select
+    // Provide user with the list of existing accounts and allow them to select
     // an account based on their input.
     public static BankAccount selectAccount(ArrayList<BankAccount> accountList, boolean isTransfer) {
         String selectedAccount;
@@ -131,6 +145,9 @@ public class AccountManager {
         // the user input
         return accountList.get(Integer.parseInt(selectedAccount) - 1);
     }
+
+    // Display the main menu that lists all commands available to the user
+    // Accept input from user and call the
     public static void manageAccount(ArrayList<BankAccount> accountList, BankAccount selectedAccount) {
 
         int action;
@@ -180,12 +197,15 @@ public class AccountManager {
                 System.out.print("\nPlease enter an amount to " + actionWord + ": $" );
                 amountString = getUserInput();
 
+                // Check if user input is a number, and if it is, check if the
+                // number is greater than zero. Yes, this probably could have been
+                // another method on its own
                 if (!isNumeric(amountString)) {
                     System.out.println("Invalid entry. Please enter an amount.");
                 } else {
                     amount = Double.parseDouble(amountString);
                     if (amount < 0 ) {
-                        System.out.println("Invalid entry. Please enter an amount.");
+                        System.out.println("Invalid entry. Please enter an amount greater than zero.");
                     } else {
                         break;
                     }
@@ -203,9 +223,11 @@ public class AccountManager {
         return scanner.nextLine();
     }
 
+    // Perform command specified by user, for specified amount, if applicable
     public static void doAcctAction(int action, double amount,
                                     ArrayList<BankAccount> accountList,
                                     BankAccount selectedAccount) {
+
         switch (action) {
             case 1 -> {
                 selectedAccount.showBalance();
