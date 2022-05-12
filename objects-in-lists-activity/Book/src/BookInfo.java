@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class BookInfo {
     public static void main(String[] args) {
 
-        System.out.println("--Book Info--");
-
         ArrayList<Book> listOfBooks = addBooks();
         displayBooks(listOfBooks);
 
@@ -73,13 +71,13 @@ public class BookInfo {
             String requestedData = getUserInput();
 
             if (requestedData.equalsIgnoreCase("everything")) {
-                System.out.println("\n");
+                System.out.println("\n--Book Info--");
                 for (Book book : listOfBooks) {
                     System.out.println(book.toString());
                 }
                 break;
             } else if (requestedData.equalsIgnoreCase("name")) {
-                System.out.println("\n");
+                System.out.println("\n--Book Info--");
                 for (Book book : listOfBooks) {
                     System.out.println(book.getTitle());
                 }
