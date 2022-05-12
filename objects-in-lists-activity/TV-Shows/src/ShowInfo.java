@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class ShowInfo {
     public static void main(String[] args) {
-
-        System.out.println("--Show Info--");
-
         ArrayList<TvShow> listOfShows = addShows();
         displayShows(listOfShows);
 
@@ -50,6 +47,7 @@ public class ShowInfo {
     }
 
     public static void displayShows(ArrayList<TvShow> listOfShows) {
+        System.out.println("\n--Show Info--");
         for (TvShow show : listOfShows) {
             System.out.println("\n" + show.toString());
         }
