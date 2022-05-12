@@ -68,35 +68,13 @@ public class AccountManager {
     }
 
     // Create new account.
-    // Prompt user to enter name of account holder and initial deposit amount.
-    //
     public static BankAccount createAccount(ArrayList<BankAccount> accountList) {
         System.out.println("\nLet's create a new bank account!\n");
         System.out.print("What's the name of the account holder?: ");
+
         // Instantiate new BankAccount object with no properties
+        // Prompt user input for account holder name and initial deposit amount
         BankAccount newAccount = new BankAccount();
-        double accInitialBalance;
-
-        newAccount.setAccHolderName(getUserInput());
-
-        while (true) {
-            System.out.print("\nWhat is the initial deposit amount?: ");
-            String userInputBalance = getUserInput();
-
-            // Check if user input is a number, and if it is, check if the
-            // number is greater than zero
-            if (isNumeric(userInputBalance)) {
-                accInitialBalance = Double.parseDouble(userInputBalance);
-                if (accInitialBalance > 0) {
-                    newAccount.setAccBalance(accInitialBalance);
-                    break;
-                } else {
-                    System.out.println("\nPlease enter a number greater than zero.");
-                }
-            } else {
-                System.out.println("\nInvalid entry.");
-            }
-        }
 
         // Set an account number for the new account.
         newAccount.setAccNumber((accountList.size() + 1));

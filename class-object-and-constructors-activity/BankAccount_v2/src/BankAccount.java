@@ -14,7 +14,35 @@ public class BankAccount {
     }
 
     // Class constructor with no parameters for new bank account
-    public BankAccount() { }
+    public BankAccount() {
+        System.out.println("\nLet's create a new bank account!\n");
+        System.out.print("What's the name of the account holder?: ");
+
+        double accInitialBalance;
+
+        this.accHolderName = AccountManager.getUserInput();
+
+        while (true) {
+            System.out.print("\nWhat is the initial deposit amount?: ");
+            String userInputBalance = AccountManager.getUserInput();
+
+            // Check if user input is a number, and if it is, check if the
+            // number is greater than zero
+            if (AccountManager.isNumeric(userInputBalance)) {
+                accInitialBalance = Double.parseDouble(userInputBalance);
+                if (accInitialBalance > 0) {
+                    this.accBalance = accInitialBalance;
+                    break;
+                } else {
+                    System.out.println("\nPlease enter a number greater than zero.");
+                }
+            } else {
+                System.out.println("\nInvalid entry.");
+            }
+        }
+
+
+    }
 
     // Return to main menu
     public void mainMenu(ArrayList<BankAccount> accountList, BankAccount selectedAccount) {
