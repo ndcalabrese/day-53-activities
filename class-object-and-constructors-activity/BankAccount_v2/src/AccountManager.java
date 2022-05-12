@@ -121,7 +121,7 @@ public class AccountManager {
 
         // Show a different message depending on if account is being selected
         // for the first time, or as a recipient for a transfer of funds.
-        String messageString = (isTransfer) ? "Please select a recipient: " : "Please select an account: ";
+        String messageString = (isTransfer) ? "Please select a recipient: " : "Please select an account: #";
         System.out.print(messageString);
 
         // Obtain user input for account number.
